@@ -1,0 +1,224 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"></head><body style="margin:0">
+<title>Happy 21st, Hunbun</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;1,6..96,400;1,6..96,600&family=Figtree:wght@400;500;600&family=Caveat:wght@500;600&display=swap">
+<style>
+/* Layout: one narrow column, a night sky in plum and lilac; each section is a small thing she taps. Single deliberate dark theme. */
+:root{
+  --night:#1a1024;
+  --plum:#2a1838;
+  --lilac:#c9a7f0;
+  --lavender:#ede1fb;
+  --gold:#f3cf7a;
+  --muted:#a693bd;
+  --line:rgba(201,167,240,.22);
+  --display:"Bodoni Moda", Georgia, serif;
+  --body:"Figtree", system-ui, sans-serif;
+  --hand:"Caveat", "Segoe Print", cursive;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--night);color:var(--lavender);font-family:var(--body);font-size:16px;line-height:1.6;min-height:100%;overflow-x:hidden}
+#sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+main{position:relative;z-index:1;max-width:560px;margin:0 auto;padding-inline:20px;padding-block:48px 72px;display:flex;flex-direction:column;gap:72px}
+h1,h2{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:1.9rem;font-style:italic}
+.eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+/* Hero */
+.hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:24px}
+.hero .date{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-size:clamp(2.6rem,11vw,4rem);font-style:italic}
+.hero h1 span{display:block;font-style:normal;font-size:.42em;letter-spacing:.04em;color:var(--lilac);margin-top:8px}
+.hero .big21{font-family:var(--display);font-size:clamp(6rem,30vw,9rem);line-height:.9;color:transparent;-webkit-text-stroke:1.5px var(--lilac);font-weight:500}
+.hero .sub{color:var(--muted);max-width:30ch}
+
+/* Envelope */
+.envelope-wrap{display:flex;flex-direction:column;align-items:center;gap:16px}
+.envelope{position:relative;width:min(100%,340px);aspect-ratio:3/2;background:var(--plum);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.envelope::before{content:"";position:absolute;inset:0;background:linear-gradient(to bottom right,transparent 49.6%,var(--line) 50%,transparent 50.4%),linear-gradient(to bottom left,transparent 49.6%,var(--line) 50%,transparent 50.4%)}
+.flap{position:absolute;left:0;right:0;top:0;height:55%;background:#3a2150;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .7s ease}
+.seal{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--lilac);color:var(--night);display:grid;place-items:center;font-family:var(--display);font-style:italic;font-size:1.3rem;box-shadow:0 0 0 6px rgba(201,167,240,.15)}
+.envelope.open .flap{transform:rotateX(180deg)}
+.envelope.open .seal{opacity:0;transition:opacity .3s}
+.pill{border:1px solid var(--lilac);background:transparent;border-radius:999px;padding:10px 22px;color:var(--lavender)}
+.pill:hover{background:rgba(201,167,240,.12)}
+.letter{background:var(--lavender);color:#2b1a3a;border-radius:4px;padding:28px 24px;font-family:var(--hand);font-size:1.45rem;line-height:1.45;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.letter .sign{text-align:right}
+
+/* Reasons */
+.reasons-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.count{font-family:var(--display);font-style:italic;color:var(--muted);font-variant-numeric:tabular-nums}
+.card{margin-top:20px;width:100%;min-height:210px;border:1px solid var(--line);background:linear-gradient(160deg,var(--plum),#22132f);border-radius:14px;padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;gap:20px;text-align:left}
+.card .reason{font-family:var(--display);font-size:1.45rem;line-height:1.3}
+.card .reason em{color:var(--lilac)}
+.card .hint{font-size:.8rem;color:var(--muted)}
+.card.flip{animation:flip .45s ease}
+@keyframes flip{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+
+/* Timeline */
+.timeline{list-style:none;margin:24px 0 0;padding:0 0 0 22px;border-left:1px solid var(--line);display:flex;flex-direction:column;gap:26px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-28px;top:7px;width:11px;height:11px;border-radius:50%;background:var(--night);border:1.5px solid var(--lilac)}
+.timeline li.now::before{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px var(--gold)}
+.timeline li.next::before{border-style:dashed}
+.when{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.timeline h3{font-family:var(--display);font-weight:500;font-size:1.2rem;margin:2px 0 4px}
+.timeline p{color:var(--muted)}
+
+/* Cake */
+.cake-sec{text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px}
+.cake{position:relative;width:240px;max-width:100%;margin-top:30px}
+.candles{display:flex;justify-content:center;gap:28px;height:70px;align-items:flex-end}
+.candle{width:12px;height:44px;background:repeating-linear-gradient(45deg,var(--lavender) 0 5px,var(--lilac) 5px 10px);border-radius:3px;position:relative;border:none;padding:0}
+.candle .flame{position:absolute;left:50%;bottom:100%;width:12px;height:20px;margin-left:-6px;margin-bottom:3px;background:radial-gradient(ellipse at 50% 70%,#fff6d0 0 25%,var(--gold) 45%,rgba(243,140,60,.7) 70%,transparent 72%);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;animation:flicker 1.2s infinite alternate;transition:opacity .3s}
+.candle.out .flame{opacity:0}
+@keyframes flicker{to{transform:scaleY(1.12) translateX(1px)}}
+.tier{border-radius:8px;margin:0 auto}
+.tier.top{width:70%;height:46px;background:var(--lilac)}
+.tier.mid{width:100%;height:66px;background:#8e63b8;margin-top:-2px;position:relative}
+.tier.mid::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:radial-gradient(circle at 10px 0,var(--lilac) 10px,transparent 11px) 0 0/20px 14px repeat-x}
+.plate{width:115%;margin-left:-7.5%;height:8px;border-radius:50%;background:var(--line)}
+.wish{font-family:var(--hand);font-size:1.6rem;color:var(--gold);min-height:2.2em}
+
+/* Song */
+.song{margin-top:22px;border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:18px;background:rgba(42,24,56,.7)}
+.track{display:flex;align-items:center;gap:16px}
+.disc{flex:none;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle,var(--night) 0 14%,var(--lilac) 15% 19%,#3a2150 20% 100%);box-shadow:inset 0 0 0 1px var(--line);animation:spin 6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.track-title{font-family:var(--display);font-style:italic;font-size:1.5rem;line-height:1.15}
+.track-artist{color:var(--muted);font-size:.9rem}
+.song .note{font-family:var(--hand);font-size:1.4rem;line-height:1.4;color:var(--lavender)}
+.listen{display:flex;gap:10px;flex-wrap:wrap}
+.listen a{border:1px solid var(--lilac);border-radius:999px;padding:9px 18px;color:var(--lavender);text-decoration:none;font-size:.9rem}
+.listen a:hover{background:rgba(201,167,240,.12)}
+.listen a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+footer{text-align:center;color:var(--muted);font-size:.85rem}
+.confetti{position:fixed;top:-12px;width:8px;height:12px;z-index:5;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<main>
+  <section class="hero">
+    <p class="date">14 October 2026</p>
+    <div class="big21" aria-hidden="true">21</div>
+    <h1>Happy birthday, Hunbun<span>Naledi Nomsotho</span></h1>
+    <p class="sub">A little corner of the internet made just for you. Scroll slowly and tap everything.</p>
+  </section>
+
+  <section class="envelope-wrap" aria-labelledby="letter-h">
+    <div style="text-align:center"><p class="eyebrow">First things first</p><h2 id="letter-h">A letter for you</h2></div>
+    <div class="envelope" id="env"><div class="flap"></div><div class="seal">N</div></div>
+    <button class="pill" id="openBtn">Open it</button>
+    <div class="letter" id="letter" hidden>
+      <p>Hunbun,</p>
+      <p>Happy 21st birthday. I wish I could be there to say it in person, but for now this little page will have to carry it for me.</p>
+      <p>It's funny to think this all started with a random click on Omegle in February last year. Out of everyone, I found you, and somehow we never stopped talking.</p>
+      <p>You say you're emotionless. I don't believe you. I see it in how kind you are, in how you tell me when something doesn't sit right with you, and in how you cheer me on every time I come to you with a new idea or goal. That encouragement means more than you know.</p>
+      <p>I know the distance makes things complicated, and I know we're still waiting for the day we finally meet. Thank you for being patient with me, and for being willing to take the risk. I'm really glad it's you.</p>
+      <p>I hope 21 is soft and good to you. I'll be here cheering, the way you always do for me.</p>
+      <p class="sign">Yours,<br>Percy</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="reasons-h">
+    <div class="reasons-head"><div><p class="eyebrow">Tap the card</p><h2 id="reasons-h">Things I like about you</h2></div><span class="count" id="count">1 / 8</span></div>
+    <button class="card" id="card" aria-live="polite"><span class="reason" id="reason"></span><span class="hint">Tap for the next one</span></button>
+  </section>
+
+  <section aria-labelledby="story-h">
+    <p class="eyebrow">How we got here</p>
+    <h2 id="story-h">Our story so far</h2>
+    <ol class="timeline">
+      <li><span class="when">February 2025</span><h3>A random click</h3><p>Two strangers on Omegle. One of the luckiest accidents of my life.</p></li>
+      <li><span class="when">Every day since</span><h3>We kept talking</h3><p>Messages, late nights, and you cheering on every idea I brought to you.</p></li>
+      <li class="now"><span class="when">14 October 2026</span><h3>You turn 21</h3><p>And I get to celebrate you, even from far away.</p></li>
+      <li class="next"><span class="when">Soon</span><h3>The day we finally meet</h3><p>The next chapter. I'm looking forward to it.</p></li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="song-h">
+    <p class="eyebrow">Press play</p>
+    <h2 id="song-h">A song for you</h2>
+    <div class="song">
+      <div class="track">
+        <div class="disc" aria-hidden="true"></div>
+        <div><div class="track-title">Orbiter</div><div class="track-artist">Noah Kahan</div></div>
+      </div>
+      <p class="note">This one's for you, Hunbun. With all this distance, I'm out here circling, but you're the steady thing I keep coming back to. Put your earphones in and think of me while it plays.</p>
+      <div class="listen">
+        <a href="https://open.spotify.com/search/Orbiter%20Noah%20Kahan" target="_blank" rel="noopener">Listen on Spotify</a>
+        <a href="https://www.youtube.com/results?search_query=Orbiter+Noah+Kahan" target="_blank" rel="noopener">Listen on YouTube</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="cake-sec" aria-labelledby="cake-h">
+    <p class="eyebrow">Last thing</p>
+    <h2 id="cake-h">Make a wish</h2>
+    <p style="color:var(--muted)">Close your eyes, make a wish, then tap each candle to blow it out.</p>
+    <div class="cake">
+      <div class="candles" id="candles">
+        <button class="candle" aria-label="Blow out candle 1"><span class="flame"></span></button>
+        <button class="candle" aria-label="Blow out candle 2"><span class="flame"></span></button>
+        <button class="candle" aria-label="Blow out candle 3"><span class="flame"></span></button>
+      </div>
+      <div class="tier top"></div>
+      <div class="tier mid"></div>
+      <div class="plate"></div>
+    </div>
+    <p class="wish" id="wish" aria-live="polite"></p>
+  </section>
+
+  <footer>Made for Naledi, from Percy.</footer>
+</main>
+
+<script>
+// Stars
+(function(){
+  const c=document.getElementById('sky'),x=c.getContext('2d');let s=[];
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){c.width=innerWidth*devicePixelRatio;c.height=innerHeight*devicePixelRatio;s=Array.from({length:110},()=>({x:Math.random()*c.width,y:Math.random()*c.height,r:(Math.random()*1.3+.3)*devicePixelRatio,p:Math.random()*6}))}
+  function draw(t){x.clearRect(0,0,c.width,c.height);for(const st of s){const a=.35+.45*Math.abs(Math.sin(t/1400+st.p));x.fillStyle='rgba(237,225,251,'+a+')';x.beginPath();x.arc(st.x,st.y,st.r,0,7);x.fill()}if(!reduce)requestAnimationFrame(draw)}
+  size();addEventListener('resize',size);requestAnimationFrame(draw);
+})();
+
+// Envelope
+const env=document.getElementById('env'),openBtn=document.getElementById('openBtn'),letter=document.getElementById('letter');
+openBtn.addEventListener('click',()=>{env.classList.add('open');openBtn.hidden=true;setTimeout(()=>{letter.hidden=false;letter.scrollIntoView({behavior:'smooth',block:'start'})},600)});
+
+// Reasons
+const reasons=[
+ "You're <em>patient</em>, even when the distance makes everything slower.",
+ "You say how you feel, out loud, without making me guess.",
+ "When something makes you uncomfortable, you <em>don't shy away</em> from saying it.",
+ "You claim you're emotionless. I've seen otherwise, and I like what I see.",
+ "You're <em>kind</em>, in small ways and big ones.",
+ "You're willing to <em>take the risk</em> on us.",
+ "Every time I tell you about an idea or a goal, you're the first to encourage me.",
+ "Out of everyone on Omegle, I found <em>you</em>. Still can't get over that."
+];
+let i=0;const card=document.getElementById('card'),rEl=document.getElementById('reason'),cEl=document.getElementById('count');
+function show(){rEl.innerHTML=reasons[i];cEl.textContent=(i+1)+' / '+reasons.length}
+show();
+card.addEventListener('click',()=>{card.classList.remove('flip');void card.offsetWidth;card.classList.add('flip');setTimeout(()=>{i=(i+1)%reasons.length;show()},220)});
+
+// Cake
+const wish=document.getElementById('wish');
+document.querySelectorAll('.candle').forEach(b=>b.addEventListener('click',()=>{
+  b.classList.add('out');b.disabled=true;
+  if(document.querySelectorAll('.candle.out').length===3){wish.textContent="Happy 21st, Hunbun. I hope it all comes true.";confetti()}
+}));
+function confetti(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cols=['#c9a7f0','#f3cf7a','#ede1fb','#8e63b8'];
+  for(let k=0;k<90;k++){const d=document.createElement('div');d.className='confetti';d.style.left=Math.random()*100+'vw';d.style.background=cols[k%4];d.style.animationDuration=(2.5+Math.random()*2.5)+'s';d.style.animationDelay=(Math.random()*.8)+'s';document.body.appendChild(d);setTimeout(()=>d.remove(),6000)}
+}
+</script>
+</body></html>
